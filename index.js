@@ -9,26 +9,26 @@ var functions = {
     if(typeof weight == "string" && weight.indexOf("%") > 0) {
       weight = parseInt(weight, 10) / 100;
     }
-    return Color(one.trim()).mix(Color(two.trim()), weight).rgbString();
+    return Color(toSimpleColor(one)).mix(Color(toSimpleColor(two)), weight).rgbString();
   },
   rgba: function() {
     if(arguments.length > 2) {
       // It's the actual rgba function, not the sass version
       return "rgba("+[].slice.call(arguments).join(",")+")";
     }
-    return Color(arguments[0]).alpha(arguments[1]).rgbString();
+    return Color(toSimpleColor(arguments[0])).alpha(arguments[1]).rgbString();
   },
   darken: function(color, amount) {
     if(typeof amount == "string" && amount.indexOf("%") > 0) {
       amount = parseInt(amount, 10) / 100;
     }
-    return Color(color).darken(amount).rgbString();
+    return Color(toSimpleColor(color)).darken(amount).rgbString();
   },
   lighten: function(color, amount) {
     if(typeof amount == "string" && amount.indexOf("%") > 0) {
       amount = parseInt(amount, 10) / 100;
     }
-    return Color(color).lighten(amount).rgbString();
+    return Color(toSimpleColor(color)).lighten(amount).rgbString();
   },
   tint: function(color, amount) {
     return functions['mix']("white", color, amount);
@@ -37,6 +37,14 @@ var functions = {
     return functions['mix']("black", color, amount);
   },
 };
+
+function toSimpleColor(color) {
+  if(functionsRegex.test(color)) {
+    return handleFunction(color);
+  } else {
+    return color.trim();
+  }
+}
 
 var functionsRegex = new RegExp(
   "(^|[^\\w\\-])" +
