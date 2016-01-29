@@ -36,6 +36,18 @@ var functions = {
   shade: function(color, amount) {
     return functions['mix']("black", color, amount);
   },
+  transparentize: function(color, amount) {
+    color = Color(toSimpleColor(color))
+    amount = parseFloat(amount.trim())
+    var alpha = Math.round((color.alpha() - amount) * 100) / 100;
+    return color.alpha(alpha).rgbString();
+  },
+  opacify: function(color, amount) {
+    color = Color(toSimpleColor(color))
+    amount = parseFloat(amount.trim())
+    var alpha = Math.round((color.alpha() + amount) * 100) / 100;
+    return color.alpha(alpha).rgbString();
+  }
 };
 
 function toSimpleColor(color) {

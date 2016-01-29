@@ -63,3 +63,19 @@ test("shade()", function(t) {
     "shade() works");
   t.end()
 });
+
+test("transparentize()", function(t) {
+  t.equal(
+    runPostCSS("body{background-color: transparentize(#255073, 0.8);}"),
+    "body{background-color: rgba(37, 80, 115, 0.2);}",
+    "transparentize() works");
+  t.end()
+});
+
+test("opacify()", function(t) {
+  t.equal(
+    runPostCSS("body{background-color: opacify(rgba(255, 0, 0, 0.4), 0.2);}"),
+    "body{background-color: rgba(255, 0, 0, 0.6);}",
+    "opacify() works");
+  t.end()
+});
