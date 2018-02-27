@@ -1,3 +1,5 @@
+# --- No longer maintained ---
+
 [PostCSS](https://github.com/postcss/postcss) plugin to transform SASS/compass color functions to more compatible CSS.
 
 Inspired, and modified from, [postcss-color-function](https://github.com/postcss/postcss-color-function).
